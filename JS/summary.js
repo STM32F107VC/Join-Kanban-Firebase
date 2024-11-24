@@ -19,8 +19,8 @@ async function init_summary(id) {
  */
 async function getFromRemoteStorage() {
     try {
-        tasks = JSON.parse(await getItem('tasks'));
-        let informationObj = JSON.parse(await getItem('summary-informations'));
+        // tasks = JSON.parse(await getItem('tasks'));
+        // let informationObj = JSON.parse(await getItem('summary-informations'));
         loadSummaryInformations(informationObj);
     } catch (error) { }
 }
@@ -79,7 +79,7 @@ function setSummaryInformations(inf, tA, tU, aF, date, done, iP, toDo) {
 async function greetUser(location) {
     let greetingText = document.getElementById('greet-user');
     let acronym = document.getElementById('acronym');
-    let user = JSON.parse(await getItem('guestOrAccount'));
+    // let user = JSON.parse(await getItem('guestOrAccount'));
     let name = user['log']['Name'];
     user = user['log'];
     if (user === 'guest') {

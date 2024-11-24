@@ -1,3 +1,4 @@
+
 /* Declare global variables */
 let countUp = -1;
 let getCategory;
@@ -19,17 +20,30 @@ let done;
  * Init function called on body="onload" to load
  * first necessary functions
  */
-async function init_board(id) {
+// window.init_board = async function(id) {
+//     await includeHTML();
+//     await loadContacts();
+//     // await loadTasks(true);
+//     markActiveLink(id);
+//     greetUser();
+//     getAddTaskMenu('overlay');
+//     assignContact('overlay');
+//     howManyTasksPerColumn();
+//     noTaskToDo();
+// }
+
+window.addEventListener('load', async function () {
+    console.log('Board loaded.');
     await includeHTML();
     await loadContacts();
-    await loadTasks(true);
+    // await loadTasks(true);
     markActiveLink(id);
     greetUser();
     getAddTaskMenu('overlay');
     assignContact('overlay');
     howManyTasksPerColumn();
     noTaskToDo();
-}
+});
 
 /**
  * Muss ich noch verkleinern
@@ -115,14 +129,14 @@ async function saveSummaryInformations(tD, iP, aF, d, aOF, i, fD) {
         'Amount-Of-Urgent-Tasks': i,
         'Date': fD
     };
-    await setItem('summary-informations', JSON.stringify(summaryInformations));
+    // await setItem('summary-informations', JSON.stringify(summaryInformations));
 }
 
 /**
  * Load tasks from backend
  */
 async function loadTasks(locate) {
-    let tasksToString = await getItem('tasks');
+    // let tasksToString = await getItem('tasks');
     if (tasksToString) {
         tasks = JSON.parse(tasksToString);
         if (locate) loadToColumn();
@@ -146,7 +160,7 @@ function loadToColumn() {
  * Open add new task overlay menu
  * 
  */
-async function openAddTaskOverlay() {
+window.openAddTaskOverlay = function () {
     document.getElementById('add-tasks-overlay-view').classList.remove('d-none');
     document.getElementById('main-div-board').classList.add('d-none');
     document.getElementById('body-board').classList.add("flex", "x-center", "y-center");
@@ -223,8 +237,8 @@ function showTaskOverlay(i) {
  */
 async function deleteTask(j) {
     tasks.splice(j, 1);
-    await setItem('tasks', JSON.stringify(tasks));
-    tasks = JSON.parse(await getItem('tasks'));
+    // await setItem('tasks', JSON.stringify(tasks));
+    // tasks = JSON.parse(await getItem('tasks'));
     location.replace('board.html');
 }
 
@@ -313,7 +327,7 @@ async function saveEditTaskChanges(taskIndex) {
         "Progressbar-Value": percent,
         "Column-location": columnLocation
     });
-    await setItem('tasks', JSON.stringify(tasks));
+    // await setItem('tasks', JSON.stringify(tasks));
     document.getElementById('edit-overlay-ok-btn').disabled = false;
     location.reload();
 }

@@ -59,7 +59,7 @@ addEventListener("resize", (event) => {
  */
 async function loadContacts() {
     try {
-        contacts = JSON.parse(await getItem('contacts'));
+        // contacts = JSON.parse(await getItem('contacts'));
         getInitialLetterOfFirstname();
     } catch (error) { }
 }
@@ -127,7 +127,7 @@ async function addContact() {
         'phone': phone.value,
         'background-color': backgroundColor
     });
-    await setItem('contacts', JSON.stringify(contacts));
+    // await setItem('contacts', JSON.stringify(contacts));
     getInitialLetterOfFirstname();
     resetAddContactsForm(name, email, phone);
     location.replace('contacts.html');
@@ -331,7 +331,7 @@ async function saveEditContactChanges(j) {
         'phone': phone,
         'background-color': getBackgroundColor
     });
-    await setItem('contacts', JSON.stringify(contacts));
+    // await setItem('contacts', JSON.stringify(contacts));
     document.getElementById('safe-btn').disabled = false;
     location.replace('contacts.html');
 }
@@ -342,8 +342,8 @@ async function saveEditContactChanges(j) {
  */
 async function deleteContact(j) {
     contacts.splice(j, 1);
-    await setItem('contacts', JSON.stringify(contacts));
-    contacts = JSON.parse(await getItem('contacts'));
+    // await setItem('contacts', JSON.stringify(contacts));
+    // contacts = JSON.parse(await getItem('contacts'));
     checkRegister();
     location.replace('contacts.html');
 }

@@ -1,3 +1,4 @@
+
 /**
  * Allow drop action
  * @param {tokenlist} ev Tokenlist from element to trop
@@ -95,7 +96,7 @@ async function changeTaskLocation(data, target) {
     let columnId = target.id;
     let index = data.slice(-1);
     tasks[index]['Column-location'] = columnId;
-    await setItem('tasks', JSON.stringify(tasks));
+    // await setItem('tasks', JSON.stringify(tasks));
 }
 
 /**
@@ -216,7 +217,7 @@ async function activeSubtasks(k, i) {
     task['Progressbar-Value'] = getAmounTOfSubtasks(task);
     tasks.splice(k, 1);
     tasks.push(task);
-    await setItem('tasks', JSON.stringify(tasks));
+    // await setItem('tasks', JSON.stringify(tasks));
 }
 
 /**

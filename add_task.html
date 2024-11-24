@@ -14,9 +14,9 @@
     <script src="JS/board_1.js"></script>
     <script src="JS/board_2.js"></script>
     <script src="JS/script.js"></script>
-    <script src="JS/add_tasks.js"></script>
+    <script type="module" src="JS/storage.js"></script>
+    <script type="module" src="JS/add_tasks.js"></script>
     <script src="JS/contacts.js"></script>
-    <script src="JS/storage.js"></script>
     <script src="assets/templates/templates.js"></script>
 
     <link rel="stylesheet" href="CSS/login.css">
@@ -25,12 +25,14 @@
     <link rel="stylesheet" href="CSS/add_tasks.css">
     <link rel="stylesheet" href="CSS/contacts.css">
 </head>
-
-<body id="body-add-tasks" onload="init_tasks('add-task-link');">
+<!-- onload="init_tasks('add-task-link');" -->
+<body id="body-add-tasks">
     <div id="side-and-topbar-board" w3-include-html="assets/templates/sid-and-topbar-template.html"></div>
 
     <!-- Hier basic einfügen -->
     <div id="add-tasks-basic-view" class="main-div-add-tasks mb--128px"></div>
+
+    <!-- <script type="module" src="JS/storage.js"></script> -->
 </body>
 
 </html>

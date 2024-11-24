@@ -1,3 +1,5 @@
+import { fetchTasks, addDocument } from "./storage.js";
+
 /* Declare global variables and arrays */
 let prioImg;
 let firstClickedImg;
@@ -5,6 +7,7 @@ let oldImg;
 let priorityStatus;
 let k = false;
 let state;
+let array = [];
 
 let tasks = [];
 let subtasks = [];
@@ -14,14 +17,35 @@ let assignedContacts = [];
  * Init function called on body="onload" to load
  * first necessary functions
  */
-async function init_tasks(id) {
-    await includeHTML();
-    await loadContacts();
-    await loadTasks();
-    markActiveLink(id);
+// async function init_tasks(id) {
+//     await includeHTML();
+//     await loadContacts();
+//     // await loadTasks();   
+//     markActiveLink(id);
+//     greetUser();
+//     getAddTaskMenu('basic');
+//     assignContact('basic');
+//     addDocument('New collection');
+// }
+
+
+/**
+ * Init function called on body="onload" to load
+ * first necessary functions
+ */
+addEventListener("load", function () {
+    console.log('Onload message.');
+    loadData();
+    // await loadTasks();   
     greetUser();
     getAddTaskMenu('basic');
     assignContact('basic');
+    markActiveLink('add-task-link');
+});
+
+async function loadData() {
+    await includeHTML();
+    await loadContacts();
 }
 
 /**
@@ -54,7 +78,7 @@ function assignContact(location) {
  * @param {variable} i This index (i) is the number for selecting
  * the current contact in the contacts = []; array.
  */
-function showAssignedContact(i, location) {
+window.showAssignedContact = function (i, location) {
     let selectedContacts = document.getElementById('displaySelectedContacts-' + `${location}`);
     let contact = contacts[i];
     let array = buildAcronym(contact);
@@ -87,7 +111,25 @@ function buildAcronym(contact) {
  * Function to get task values for new task
  *
  */
-async function addTask(location) {
+// async function addTask(location) {
+//     let title = document.getElementById(`title-${location}`);
+//     let description = document.getElementById(`textarea-${location}`);
+//     let date = document.getElementById(`date-${location}`);
+//     let category = document.getElementById(`category-${location}`);
+//     let bgcCode = checkCategory(category);
+//     document.getElementById('submitBtn').disabled = true;
+//     pushToTasksArray(title, description, date, category, bgcCode);
+//     // await setItem('tasks', JSON.stringify(tasks));
+//     resetAddTaskForm(location);
+//     document.getElementById('submitBtn').disabled = false;
+// }
+
+/**
+ * Get alle to the new task related values and push these to tasks array for saving in firestore database
+ * 
+ * @param {string} location - Variable with location as a string "basic or overlay-menu" to locate from which form the task was added
+ */
+window.addTask = async function(location) {
     let title = document.getElementById(`title-${location}`);
     let description = document.getElementById(`textarea-${location}`);
     let date = document.getElementById(`date-${location}`);
@@ -95,7 +137,7 @@ async function addTask(location) {
     let bgcCode = checkCategory(category);
     document.getElementById('submitBtn').disabled = true;
     pushToTasksArray(title, description, date, category, bgcCode);
-    await setItem('tasks', JSON.stringify(tasks));
+    addDocument(tasks[tasks.length -1]);
     resetAddTaskForm(location);
     document.getElementById('submitBtn').disabled = false;
 }
@@ -172,7 +214,7 @@ function setToLocalStorage(t, n) {
  * the id can take the value "high", "medium" and "low"
  * @param {string} id Dynamic id of priority images
  */
-function savePriorityState(id, location) {
+window.savePriorityState = function (id, location) {
     let div = document.getElementById(`priority-container-${location}`);
     let priorityImg = div.querySelector('#prio-' + `${id}-` + `${location}`);
     let priorityImgOld = div.querySelector('#prio-' + `${oldImg}-` + `${location}`);
@@ -252,7 +294,7 @@ function setDefaultPriorityImg(img, id) {
  * Remove plus icon then add cross and tick- icons for canceling and accept
  * subtask
  */
-function toggleIcons(location) {
+window.toggleIcons = function(location) {
     let div = document.getElementById('subtasks-content-' + `${location}`);
     div.classList.add('blueBorderThin');
     let plusIcon = document.getElementById('plus-icon-' + `${location}`);
@@ -265,7 +307,7 @@ function toggleIcons(location) {
  * Add a subtasks. Max. two subtasks possible.
  * Empty subtasks field is not allowed.
  */
-function addSubtask(location) {
+window.addSubtask = function(location) {
     let list = document.getElementById('displaySubtasks-' + `${location}`);
     let input = document.getElementById('subtasks-' + `${location}`);
     let inputValue = input.value;
@@ -297,7 +339,7 @@ function clickHandlerSave(state, location) {
  * Make subtask editable to change
  * @param {variable} state Index of the subtask
  */
-function editSubtask(state, location) {
+window.editSubtask = function(state, location) {
     document.getElementById(`subtask-delete-accept-${state}-${location}`).classList.remove('opacity-zero');
     let subtask = document.getElementById(`subtask${state}-${location}`);
     let subtaskValue = document.getElementById(`value${state}-${location}`);
@@ -346,7 +388,7 @@ function clearSubtasks(input) {
  * Function to delete an added subtask
  * @param {variable} x Id number of the subtask
  */
-function deleteSubtask(x, location) {
+window.deleteSubtask = function(x, location) {
     let div = document.getElementById(`subtask${x}-${location}`);
     if (x == 1 && subtasks.length == 1) {
         subtasks.splice(0, 1);
@@ -357,7 +399,7 @@ function deleteSubtask(x, location) {
 /**
  * Cancle subtask and clear input field
  */
-function cancleSubtask(location) {
+window.cancleSubtask = function(location) {
     let subtask = document.getElementById('subtasks-' + `${location}`);
     subtask.value = '';
 }
@@ -374,6 +416,6 @@ function resetAddTaskForm(location) {
     document.getElementById(`subtasks-${location}`).value = '';
     document.getElementById(`displaySubtasks-${location}`).replaceChildren();
     document.getElementById(`displaySelectedContacts-${location}`).replaceChildren();
-    let img = document.getElementById('prio-' + `${oldImg}-` + `${location}`).src = `assets/img/prio-default-${oldImg}.png`;
+    document.getElementById('prio-' + `${oldImg}-` + `${location}`).src = `assets/img/prio-default-${oldImg}.png`;
     subtasks = [];
 }

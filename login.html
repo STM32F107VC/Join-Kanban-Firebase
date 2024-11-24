@@ -9,19 +9,25 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
 
+    <!-- <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-installations-compat.js"></script> -->
+
+
     <!-- Include CSS and Script Sheets -->
     <script src="JS/script.js"></script>
     <script src="JS/includeHTML.js"></script>
     <script src="JS/contacts.js"></script>
-    <script src="JS/storage.js"></script>
+    <script type="module" src="JS/storage.js"></script>
     <script src="JS/summary.js"></script>
-    
+
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/login.css">
     <link rel="stylesheet" href="CSS/fonts_inter.css">
 </head>
 
 <!-- init()  deleteUsers(1) -->
+
 <body class="body-login flex x-center y-center flex-column" onload="init();">
     <!-- Sign up button -->
     <div class="capa-2-div flex x-center y-center">
@@ -125,7 +131,8 @@
         <a class="p-8px" target="_blank" href="legal_notice.html">Legal Notice</a>
     </footer>
 
-    <h1>this is a test line</h1>
+
+    <script type="module" src="JS/storage.js"></script>
 </body>
 
 </html>

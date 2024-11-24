@@ -8,11 +8,16 @@ let users = [];
  * first necessary functions
  */
 async function init() {
+    getTask();
     await includeHTML();
     await loadUsers();
     greetUser();
     loadLoginScreen();
     await loadContacts();
+}
+
+function getTask() {
+    // console.log('Get task from tasks collection.');
 }
 
 /**
@@ -79,7 +84,7 @@ function login() {
  */
 async function guestOrUserAccount(log) {
     let login = { log };
-    await setItem('guestOrAccount', JSON.stringify(login));
+    // await setItem('guestOrAccount', JSON.stringify(login));
     window.location.href = "summary.html";
 }
 
@@ -146,7 +151,7 @@ async function addNewUser() {
         let comparePassword = document.getElementById("compare-password");
         checkbox.classList.remove('checkbox-checked');
         saveNewUser(name, email, password, comparePassword);
-        await setItem('users', JSON.stringify(users));
+        // await setItem('users', JSON.stringify(users));
     } else markCheckbox();
 }
 
@@ -217,7 +222,7 @@ function checkedCheckbox(cB) {
  */
 async function deleteUsers(i) {
     users.splice(i, 1);
-    await setItem('users', JSON.stringify(users));
-    contacts = JSON.parse(await getItem('users'));
+    // await setItem('users', JSON.stringify(users));
+    // contacts = JSON.parse(await getItem('users'));
     window.location = window.location;
 }

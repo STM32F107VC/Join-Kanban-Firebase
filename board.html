@@ -9,10 +9,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
 
-    <script async src="JS/storage.js"></script>
+    <script type="module" async src="JS/storage.js"></script>
     <script src="JS/includeHTML.js"></script>
-    <script src="JS/board_1.js"></script>
-    <script src="JS/board_2.js"></script>
+    <script type="module" src="JS/board_1.js"></script>
+    <script type="module" src="JS/board_2.js"></script>
     <script src="assets/templates/templates.js"></script>
     <script src="JS/add_tasks.js"></script>
     <script src="JS/contacts.js"></script>
@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="CSS/contacts.css">
 </head>
 
-<body id="body-board" onload="init_board('board-link');">
+<!-- onload="init_board('board-link');" -->
+<body id="body-board">
     <div id="side-and-topbar-board" w3-include-html="assets/templates/sid-and-topbar-template.html"></div>
 
     <!-- Edit add task form -->
@@ -171,6 +172,8 @@
             </div>
         </div>
     </div>
+
+    <!-- <script type="module" src="JS/storage.js"></script> -->
 </body>
 
 </html>
